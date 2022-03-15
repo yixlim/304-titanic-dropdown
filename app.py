@@ -1,11 +1,12 @@
 ######### Import your libraries #######
 import dash
-import dash_core_components as dcc
-import dash_html_components as html
+from dash import html
+from dash import dcc
+from dash.dependencies import Input, Output, State
 import pandas as pd
 import plotly as py
 import plotly.graph_objs as go
-from plotly.graph_objs import *
+
 
 ###### Define your variables #####
 tabtitle = 'Titanic!'
@@ -13,7 +14,7 @@ color1='#92A5E8'
 color2='#8E44AD'
 color3='#FFC300'
 sourceurl = 'https://www.kaggle.com/c/titanic'
-githublink = 'https://github.com/austinlasseter/titanic-example-app'
+githublink = 'https://github.com/plotly-dash-apps/304-titanic-dropdown'
 
 
 ###### Import a dataframe #######
@@ -45,10 +46,11 @@ app.layout = html.Div([
 
 
 ######### Interactive callbacks go here #########
-@app.callback(dash.dependencies.Output('display-value', 'figure'),
-              [dash.dependencies.Input('dropdown', 'value')])
+@app.callback(Output('display-value', 'figure'),
+              [Input('dropdown', 'value')])
 def display_value(continuous_var):
-    results=pd.DataFrame(df.groupby(['Cabin Class', 'Embarked'])[continuous_var].mean())
+    grouped_mean=df.groupby(['Cabin Class', 'Embarked'])[continuous_var].mean()
+    results=pd.DataFrame(grouped_mean)
     # Create a grouped bar chart
     mydata1 = go.Bar(
         x=results.loc['first'].index,
