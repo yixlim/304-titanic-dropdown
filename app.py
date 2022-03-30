@@ -50,36 +50,36 @@ app.layout = html.Div([
 @app.callback(Output('display-value', 'figure'),
               [Input('dropdown', 'value')])
 def display_value(continuous_var):
-    results=pd.DataFrame(df.groupby(['Embarked','Cabin Class'])[continuous_var].count())
-    results=pd.DataFrame(grouped_count)
+    grouped_count=pd.DataFrame(df.groupby(['Embarked','Pclass'])[continuous_var].count())
+results=pd.DataFrame(grouped_count)
     # Create a grouped bar chart
     
-    mydata1 = go.Bar(
+mydata1 = go.Bar(
     x=results.loc['Cherbourg'].index,
     y=results.loc['Cherbourg'][continuous_var],
     name='Cherbourg',
     marker=dict(color='darkgreen')
     )
-    mydata2 = go.Bar(
+mydata2 = go.Bar(
         x=results.loc['Queenstown'].index,
         y=results.loc['Queenstown'][continuous_var],
         name='Queenstown',
         marker=dict(color='lightblue')
     )
-    mydata3 = go.Bar(
+mydata3 = go.Bar(
         x=results.loc['Southampton'].index,
         y=results.loc['Southampton'][continuous_var],
         name='Southampton',
         marker=dict(color='orange')
     )
 
-    mylayout = go.Layout(
+mylayout = go.Layout(
         title='Grouped bar chart',
         xaxis = dict(title = 'Class'), # x-axis label
         yaxis = dict(title = str(continuous_var)), # y-axis label
 
     )
-    fig = go.Figure(data=[mydata1, mydata2, mydata3], layout=mylayout)
+fig = go.Figure(data=[mydata1, mydata2, mydata3], layout=mylayout)
     return fig
 
 
