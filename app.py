@@ -20,8 +20,8 @@ githublink = 'https://github.com/plotly-dash-apps/304-titanic-dropdown'
 ###### Import a dataframe #######
 df = pd.read_csv("https://raw.githubusercontent.com/austinlasseter/plotly_dash_tutorial/master/00%20resources/titanic.csv")
 df['Female']=df['Sex'].map({'male':0, 'female':1})
-df['Port of Embarkation'] = df['Embarked'].map({'Southampton':'Southampton', 'Cherbourg': 'Cherbourg', 'Queenstown':'Queenstown'})
-df['Cabin Class'] = df['Pclass'].map({1:'first', 2: 'second', 3:'third'})
+df['Embarked'].map({'Southampton':'Southampton', 'Cherbourg': 'Cherbourg', 'Queenstown':'Queenstown'})
+df['Pclass'].map({1:'first', 2: 'second', 3:'third'})
 variables_list=['Survived', 'Female', 'Fare', 'Age']
 
 ########### Initiate the app
