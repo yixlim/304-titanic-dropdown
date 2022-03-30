@@ -50,8 +50,8 @@ app.layout = html.Div([
 @app.callback(Output('display-value', 'figure'),
               [Input('dropdown', 'value')])
 def display_value(continuous_var):
-    grouped_count=pd.DataFrame(df.groupby(['Embarked','Pclass'])[continuous_var].count())
-    results=pd.DataFrame(grouped_count)
+    grouped_mean=pd.DataFrame(df.groupby(['Embarked','Pclass'])[continuous_var].mean())
+    results=pd.DataFrame(grouped_mean)
         # Create a grouped bar chart
 
     mydata1 = go.Bar(
